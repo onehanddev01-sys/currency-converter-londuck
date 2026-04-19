@@ -7,8 +7,7 @@
     "start": "node server/server.js",
     "dev": "nodemon server/server.js",
     "install-client": "cd client && npm ci",
-    "build": "cd client && npm run build",
-    "postinstall": "npm run install-client",
+    "build": "npm run install-client && cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
   "keywords": ["currency", "converter", "postgresql", "react", "express"],

@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();
+app.set('trust proxy', 1);
 const port = process.env.PORT || 5000;
 const buildPath = path.join(__dirname, '..', 'client', 'build');
 

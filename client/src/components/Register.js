@@ -42,7 +42,7 @@ const Register = () => {
     setError('');
 
     try {
-      const response = await axios.post('/api/register', {
+      await axios.post('/api/register', {
         username: formData.username,
         email: formData.email,
         password: formData.password

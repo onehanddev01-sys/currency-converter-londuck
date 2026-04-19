@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import {
   Paper,
   Typography,
@@ -20,20 +20,21 @@ const Favorites = () => {
   const [error, setError] = useState('');
   const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    if (user) {
-      fetchFavorites();
-    }
-  }, [user]);
-
-  const fetchFavorites = async () => {
+  const fetchFavorites = useCallback(async () => {
+    if (!user) return;
     try {
       const response = await axios.get(`/api/favorites/${user.id}`);
       setFavorites(response.data);
     } catch (error) {
       setError('Failed to load favorites');
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      fetchFavorites();
+    }
+  }, [user, fetchFavorites]);
 
   const handleRemoveFavorite = async (id) => {
     try {

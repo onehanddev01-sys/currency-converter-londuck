@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import {
   Paper,
   TextField,
@@ -32,20 +32,19 @@ const Converter = () => {
   const [favorites, setFavorites] = useState([]);
   const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    if (user) {
-      fetchFavorites();
-    }
-  }, [user]);
-
-  const fetchFavorites = async () => {
+  const fetchFavorites = useCallback(async () => {
+    if (!user) return;
     try {
       const response = await axios.get(`/api/favorites/${user.id}`);
       setFavorites(response.data);
     } catch (error) {
       console.error('Error fetching favorites:', error);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    fetchFavorites();
+  }, [fetchFavorites]);
 
   const handleConvert = async () => {
     if (!amount || isNaN(amount)) {

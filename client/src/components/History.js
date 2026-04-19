@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import {
   Paper,
   Typography,
@@ -19,20 +19,21 @@ const History = () => {
   const [error, setError] = useState('');
   const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    if (user) {
-      fetchHistory();
-    }
-  }, [user]);
-
-  const fetchHistory = async () => {
+  const fetchHistory = useCallback(async () => {
+    if (!user) return;
     try {
       const response = await axios.get(`/api/history/${user.id}`);
       setHistory(response.data);
     } catch (error) {
       setError('Failed to load conversion history');
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      fetchHistory();
+    }
+  }, [user, fetchHistory]);
 
   if (!user) {
     return (

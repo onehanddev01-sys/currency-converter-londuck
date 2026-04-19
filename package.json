@@ -6,9 +6,10 @@
   "scripts": {
     "start": "node server/server.js",
     "dev": "nodemon server/server.js",
-    "build": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build"
+    "install-client": "cd client && npm ci",
+    "build": "npm run install-client && cd client && npm run build",
+    "postinstall": "npm run install-client",
+    "heroku-postbuild": "npm run build"
   },
   "keywords": ["currency", "converter", "postgresql", "react", "express"],
   "author": "Purin",

@@ -1,8 +1,11 @@
 const path = require('path');
+const path = require('path');
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();

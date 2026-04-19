@@ -22,7 +22,6 @@ const Navbar = () => {
           <Button color="inherit" component={Link} to="/">Convert</Button>
           {user && (
             <>
-              <Button color="inherit" component={Link} to="/history">History</Button>
               <Button color="inherit" component={Link} to="/favorites">Favorites</Button>
             </>
           )}

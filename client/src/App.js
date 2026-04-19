@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Navbar from './components/Navbar';
 import Converter from './components/Converter';
-import History from './components/History';
 import Favorites from './components/Favorites';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -32,7 +31,6 @@ function App() {
           <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
             <Routes>
               <Route path="/" element={<Converter />} />
-              <Route path="/history" element={<History />} />
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
